@@ -108,10 +108,11 @@ def get_trans_rate_matrix_combo(rate_matrix_mono, combo_rr):
     return matrix_combo
 
 
-# # tests
-# probMatrix = get_trans_prob_matrix(Data.TRANS_MATRIX)
-# rateMatrixMono = get_trans_rate_matrix(probMatrix)
-# rateMatrixCombo = get_trans_rate_matrix_combo(rateMatrixMono, Data.TREATMENT_RR)
-#
-# print(rateMatrixMono)
-# print(rateMatrixCombo)
+# tests
+if __name__ == '__main__':
+    probMatrix = get_trans_prob_matrix(Data.TRANS_MATRIX)
+    rateMatrixMono = get_trans_rate_matrix(probMatrix)
+    rateMatrixCombo = get_trans_rate_matrix_combo(rateMatrixMono, Data.TREATMENT_RR)
+
+    print(rateMatrixMono)
+    print(rateMatrixCombo)
