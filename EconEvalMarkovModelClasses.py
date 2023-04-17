@@ -112,12 +112,8 @@ class PatientCostUtilityMonitor:
         utility = self.params.annualStateUtilities[current_state.value]
 
         # discounted cost and utility (continuously compounded)
-        discounted_cost = econ.pv_continuous_payment(payment=cost,
-                                                     discount_rate=self.params.discountRate,
-                                                     discount_period=(self.tLastRecorded, time))
-        discounted_utility = econ.pv_continuous_payment(payment=utility,
-                                                        discount_rate=self.params.discountRate,
-                                                        discount_period=(self.tLastRecorded, time))
+        discounted_cost =
+        discounted_utility =
 
         # update total discounted cost and utility
         self.totalDiscountedCost += discounted_cost

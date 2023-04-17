@@ -105,13 +105,9 @@ def get_trans_rate_matrix_combo(rate_matrix_mono, combo_rr):
 
     # populate the combo matrix
     # calculate the effect of combo-therapy on non-diagonal elements
-    for s in range(len(matrix_combo)):
-        # rates to HIV states
-        for next_s in range(s + 1, len(HealthStates)-1):
-            matrix_combo[s][next_s] = combo_rr * rate_matrix_mono[s][next_s]
 
-        # rates of background mortality
-        matrix_combo[s][-1] = rate_matrix_mono[s][-1]
+
+
 
     return matrix_combo
 
