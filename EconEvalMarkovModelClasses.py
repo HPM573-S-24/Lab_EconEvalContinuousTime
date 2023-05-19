@@ -1,9 +1,10 @@
+import deampy.econ_eval as econ
+import deampy.statistics as stats
 import numpy as np
+from deampy.markov import Gillespie
+from deampy.plots.sample_paths import PrevalencePathBatchUpdate
 
-import SimPy.Markov as Markov
-import SimPy.SamplePath as Path
-import SimPy.Statistics as Stat
-from InputData import HealthStates
+from EconEvalInputData import HealthStates
 
 
 class Patient:
@@ -22,7 +23,7 @@ class Patient:
         # random number generator for this patient
         rng = np.random.RandomState(seed=self.id)
         # gillespie algorithm
-        gillespie = Markov.Gillespie(transition_rate_matrix=self.params.transRateMatrix)
+        gillespie = Gillespie(transition_rate_matrix=self.params.transRateMatrix)
 
         t = 0  # simulation time
         if_stop = False
@@ -112,7 +113,6 @@ class PatientCostUtilityMonitor:
 
         # discounted cost and utility (continuously compounded)
         discounted_cost =
-
         discounted_utility =
 
         # update total discounted cost and utility
@@ -188,15 +188,16 @@ class CohortOutcomes:
         """
 
         # summary statistics
-        self.statSurvivalTime = Stat.SummaryStat(name='Survival time', data=self.survivalTimes)
-        self.statTimeToAIDS = Stat.SummaryStat(name='Time until AIDS', data=self.timesToAIDS)
-        self.statCost = Stat.SummaryStat(name='Discounted cost', data=self.costs)
-        self.statUtility = Stat.SummaryStat(name='Discounted utility', data=self.utilities)
+        self.statSurvivalTime = stats.SummaryStat(name='Survival time', data=self.survivalTimes)
+        self.statTimeToAIDS = stats.SummaryStat(name='Time until AIDS', data=self.timesToAIDS)
+        self.statCost = stats.SummaryStat(name='Discounted cost', data=self.costs)
+        self.statUtility = stats.SummaryStat(name='Discounted utility', data=self.utilities)
 
         # survival curve
-        self.nLivingPatients = Path.PrevalencePathBatchUpdate(
+        self.nLivingPatients = PrevalencePathBatchUpdate(
             name='# of living patients',
             initial_size=initial_pop_size,
             times_of_changes=self.survivalTimes,
             increments=[-1] * len(self.survivalTimes)
         )
+

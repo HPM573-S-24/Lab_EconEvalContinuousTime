@@ -1,8 +1,10 @@
 from enum import Enum
+
+import deampy.markov as markov
 import numpy as np
-import InputData as Data
-from InputData import HealthStates
-import SimPy.Markov as Markov
+
+import EconEvalInputData as Data
+from EconEvalInputData import HealthStates
 
 
 class Therapies(Enum):
@@ -72,7 +74,7 @@ def get_trans_prob_matrix(trans_matrix):
 def get_trans_rate_matrix(trans_prob_matrix):
 
     # find the transition rate matrix
-    trans_rate_matrix = Markov.discrete_to_continuous(
+    trans_rate_matrix = markov.discrete_to_continuous(
         trans_prob_matrix=trans_prob_matrix,
         delta_t=1)
 
@@ -99,10 +101,12 @@ def get_trans_rate_matrix_combo(rate_matrix_mono, combo_rr):
     # create an empty list of lists
     matrix_combo = []
     for row in rate_matrix_mono:
-        matrix_combo.append([0]*len(row))  # adding a row [0, 0, 0]
+        matrix_combo.append([0]*len(row))  # adding a row [0, 0, 0, 0, 0]
 
     # populate the combo matrix
     # calculate the effect of combo-therapy on non-diagonal elements
+
+
 
 
     return matrix_combo
